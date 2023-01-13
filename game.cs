@@ -2,71 +2,72 @@
 using System;
 using System.Collections.Generic;
 
-class Game
+namespace MyApp
 {
-    private Entity character;
-    private List<Entity> ennemies;
-
-    private Map map;
-
-    public Game()
+    class Game
     {
-        this.character = new Entity(1,1);
-        this.map = new Map(10,10);
-        this.ennemies = new List<Entity>();
-        map.Draw();
-        
-    }
+        private Entity character;
+        private List<Entity> ennemies;
 
-    public bool addEnnemy(int x, int y)
-    {
-        if (this.map.getCell(x,y) == '.')
+        private Map map;
+
+        public Game()
         {
-            this.ennemies.Add(new Entity(x, y));
-            return true;
+            this.character = new Entity(1,1);
+            this.map = new Map(10,10);
+            this.ennemies = new List<Entity>();
+            map.Draw();
         }
-        return false;
-    }
 
-    public void Run()
-    {
-        while (true)
+        public bool addEnnemy(int x, int y)
         {
-            Console.Clear();
-            
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-            if (keyInfo.Key == ConsoleKey.UpArrow)
+            if (this.map.getCell(x,y) == '.')
             {
-                if (this.character.X > 0) 
-                this.character.X--;
+                this.ennemies.Add(new Entity(x, y));
+                return true;
             }
-            else if (keyInfo.Key == ConsoleKey.DownArrow)
+            return false;
+        }
+
+        public void Run()
+        {
+            while (true)
             {
-                if (this.character.X < this.map.lenght - 1) 
-                this.character.X++;
-            }
-            else if (keyInfo.Key == ConsoleKey.LeftArrow)
-            {
-                if (this.character.Y > 0) 
-                this.character.Y--;
-            }
-            else if (keyInfo.Key == ConsoleKey.RightArrow)
-            {
-                if (this.character.Y < this.map.height -1) 
-                this.character.Y++;
-            }
-            foreach (Entity enemy in this.ennemies)
+                Console.Clear();
+                
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.UpArrow)
                 {
-                if (this.character.X == enemy.X && this.character.Y == enemy.Y)
+                    if (this.character.X > 0) 
+                    this.character.X--;
+                }
+                else if (keyInfo.Key == ConsoleKey.DownArrow)
                 {
-                    Console.WriteLine("Game Over!");
-                    return;
+                    if (this.character.X < this.map.lenght - 1) 
+                    this.character.X++;
+                }
+                else if (keyInfo.Key == ConsoleKey.LeftArrow)
+                {
+                    if (this.character.Y > 0) 
+                    this.character.Y--;
+                }
+                else if (keyInfo.Key == ConsoleKey.RightArrow)
+                {
+                    if (this.character.Y < this.map.height -1) 
+                    this.character.Y++;
+                }
+                foreach (Entity enemy in this.ennemies)
+                    {
+                    if (this.character.X == enemy.X && this.character.Y == enemy.Y)
+                    {
+                        Console.WriteLine("Game Over!");
+                        return;
+                    }
                 }
             }
         }
     }
-}
-               
+}                
 
 
                // for (int i = 0; i < 10; i++)
