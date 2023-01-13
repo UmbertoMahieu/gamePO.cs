@@ -1,94 +1,97 @@
 
+using System.Collections.Generic;
+
 class Game
 {
-    private int playerX;
-    private int playerY;
-    private List<Enemy> enemies;
-    private List<Enemy> door;
+    private Entity character;
+    private List<Entity> ennemies;
+
+    private Map map;
 
     public Game()
     {
+        this.character = new Entity(1,1);
+        this.map = new Map(10,10);
+        this.ennemies = new List<Entity>();
         
-        playerX = 1;
-        playerY = 1;
-
-        Random rnd = new Random();
-        int v1 = rnd.Next(1,9);
-        int v2 = rnd.Next(1,9);
-        int v3 = rnd.Next(1,9);
-        int v4 = rnd.Next(1,9);
-
-
-        enemies = new List<Enemy>();
-        enemies.Add(new Enemy(v1, v2));
-
-        // door = new List<door>();
-        // door.Add(new door(v1, v2));
     }
 
-     public void Run()
+    public bool addEnnemy(int x, int y)
     {
-        while (true)
+        if (this.map.getCell(x,y) == '.')
         {
-            Console.Clear();
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    if (i == playerX && j == playerY)
-                    {
-                        Console.Write("P");
-                    }
-                    else
-                    {
-                        bool enemyExist = false;
-                        foreach (Enemy enemy in enemies)
-                        {
-                            if (i == enemy.X && j == enemy.Y)
-                            {
-                                Console.Write("E");
-                                enemyExist = true;
-                                break;
-                            }
-                        }
-                        if (!enemyExist)
-                        {
-                            Console.Write(map[i, j]);
-                        }
-                    }
-                }
-                Console.WriteLine();
-            }
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-            if (keyInfo.Key == ConsoleKey.UpArrow)
-            {
-                if (playerX > 0) 
-                playerX--;
-            }
-            else if (keyInfo.Key == ConsoleKey.DownArrow)
-            {
-                if (playerX < 9) 
-                playerX++;
-            }
-            else if (keyInfo.Key == ConsoleKey.LeftArrow)
-            {
-                if (playerY > 0) 
-                playerY--;
-            }
-            else if (keyInfo.Key == ConsoleKey.RightArrow)
-            {
-                if (playerY < 9) 
-                playerY++;
-            }
-            foreach (Enemy enemy in enemies)
-                {
-                if (playerX == enemy.X && playerY == enemy.Y)
-                {
-                    Console.WriteLine("Game Over!");
-                    return;
-                }
-            }
+            this.ennemies.Add(new Entity(x, y));
+            return true;
         }
+        return false;
     }
+
+    // public void Run()
+    // {
+    //     while (true)
+    //     {
+    //         Console.Clear();
+            
+    //         ConsoleKeyInfo keyInfo = Console.ReadKey();
+    //         if (keyInfo.Key == ConsoleKey.UpArrow)
+    //         {
+    //             if (playerX > 0) 
+    //             playerX--;
+    //         }
+    //         else if (keyInfo.Key == ConsoleKey.DownArrow)
+    //         {
+    //             if (playerX < 9) 
+    //             playerX++;
+    //         }
+    //         else if (keyInfo.Key == ConsoleKey.LeftArrow)
+    //         {
+    //             if (playerY > 0) 
+    //             playerY--;
+    //         }
+    //         else if (keyInfo.Key == ConsoleKey.RightArrow)
+    //         {
+    //             if (playerY < 9) 
+    //             playerY++;
+    //         }
+    //         foreach (Entity enemy in enemies)
+    //             {
+    //             if (playerX == enemy.X && playerY == enemy.Y)
+    //             {
+    //                 Console.WriteLine("Game Over!");
+    //                 return;
+    //             }
+    //         }
+    //     }
+    // }
 }
                
+
+
+               // for (int i = 0; i < 10; i++)
+            // {
+            //     for (int j = 0; j < 10; j++)
+            //     {
+            //         if (i == playerX && j == playerY)
+            //         {
+            //             Console.Write("P");
+            //         }
+            //         else
+            //         {
+            //             bool enemyExist = false;
+            //             foreach (Enemy enemy in enemies)
+            //             {
+            //                 if (i == enemy.X && j == enemy.Y)
+            //                 {
+            //                     Console.Write("E");
+            //                     enemyExist = true;
+            //                     break;
+            //                 }
+            //             }
+            //             if (!enemyExist)
+            //             {
+            //                 Console.Write(map[i, j]);
+            //             }
+            //         }
+            //     }
+            //     Console.WriteLine();
+            // }

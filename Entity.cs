@@ -1,9 +1,9 @@
-class Enemy
+class Entity
 {
     private int x;
     private int y;
 
-    public Enemy(int x, int y)
+    public Entity(int x, int y)
     {
         this.x = x;
         this.y = y;
