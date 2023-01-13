@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 
 class Game
@@ -13,6 +14,7 @@ class Game
         this.character = new Entity(1,1);
         this.map = new Map(10,10);
         this.ennemies = new List<Entity>();
+        map.Draw();
         
     }
 
@@ -26,43 +28,43 @@ class Game
         return false;
     }
 
-    // public void Run()
-    // {
-    //     while (true)
-    //     {
-    //         Console.Clear();
+    public void Run()
+    {
+        while (true)
+        {
+            Console.Clear();
             
-    //         ConsoleKeyInfo keyInfo = Console.ReadKey();
-    //         if (keyInfo.Key == ConsoleKey.UpArrow)
-    //         {
-    //             if (playerX > 0) 
-    //             playerX--;
-    //         }
-    //         else if (keyInfo.Key == ConsoleKey.DownArrow)
-    //         {
-    //             if (playerX < 9) 
-    //             playerX++;
-    //         }
-    //         else if (keyInfo.Key == ConsoleKey.LeftArrow)
-    //         {
-    //             if (playerY > 0) 
-    //             playerY--;
-    //         }
-    //         else if (keyInfo.Key == ConsoleKey.RightArrow)
-    //         {
-    //             if (playerY < 9) 
-    //             playerY++;
-    //         }
-    //         foreach (Entity enemy in enemies)
-    //             {
-    //             if (playerX == enemy.X && playerY == enemy.Y)
-    //             {
-    //                 Console.WriteLine("Game Over!");
-    //                 return;
-    //             }
-    //         }
-    //     }
-    // }
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            if (keyInfo.Key == ConsoleKey.UpArrow)
+            {
+                if (this.character.X > 0) 
+                this.character.X--;
+            }
+            else if (keyInfo.Key == ConsoleKey.DownArrow)
+            {
+                if (this.character.X < this.map.lenght - 1) 
+                this.character.X++;
+            }
+            else if (keyInfo.Key == ConsoleKey.LeftArrow)
+            {
+                if (this.character.Y > 0) 
+                this.character.Y--;
+            }
+            else if (keyInfo.Key == ConsoleKey.RightArrow)
+            {
+                if (this.character.Y < this.map.height -1) 
+                this.character.Y++;
+            }
+            foreach (Entity enemy in this.ennemies)
+                {
+                if (this.character.X == enemy.X && this.character.Y == enemy.Y)
+                {
+                    Console.WriteLine("Game Over!");
+                    return;
+                }
+            }
+        }
+    }
 }
                
 

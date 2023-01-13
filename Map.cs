@@ -2,9 +2,15 @@ class Map
 {
     private char[][] matrix;
 
+    public int lenght {get;}
+
+    public int height {get;}
+
 
     public Map(int lenght, int height)
     {
+        this.lenght = lenght;
+        this.height = height;
         matrix = new char[height][];
         for (int i = 0; i < height; i++)
         {
@@ -12,7 +18,7 @@ class Map
 
             for (int j = 0; j < lenght; j++)
             {
-                if (i == 0 || i == 9 || j == 0 || j == 9)
+                if (i == 0 || i == height -1 || j == 0 || j == lenght -1)
                 {
                     matrix[i][j] = '#';
                 }
@@ -25,10 +31,10 @@ class Map
     }
 
 
-    public void Draw(Entity[] entity){
-        for (int i = 0; i < 10; i++)
+    public void Draw(){
+        for (int i = 0; i < this.height; i++)
         {   
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < this.lenght; j++)
             {
                 System.Console.Write(matrix[i][j]);
             }
