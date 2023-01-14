@@ -110,8 +110,8 @@ namespace MyApp
                     Array values = Enum.GetValues(typeof(Directions));
                     Directions randomDirection = (Directions)values.GetValue(rnd.Next(values.Length));
                     if (enemy.ChangeCell(randomDirection)) this.Draw();
-                    Thread.Sleep(1000);
                 }
+                Thread.Sleep(1000);
             }
         }
     }
