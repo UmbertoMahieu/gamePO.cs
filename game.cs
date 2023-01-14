@@ -12,7 +12,7 @@ namespace MyApp
 
         public Game()
         {
-            this.map = new Map(10,10);
+            this.map = new Map(30,10);
             this.character = new Entity(this.map, map.GetCell(1, 1));
             this.enemies = new List<Entity>();
             this.addEnnemy();
@@ -106,11 +106,13 @@ namespace MyApp
             Random rnd;
             while (true) {
                 rnd = new Random();
+                bool f = false;
                 foreach (Entity enemy in this.enemies) {
                     Array values = Enum.GetValues(typeof(Directions));
                     Directions randomDirection = (Directions)values.GetValue(rnd.Next(values.Length));
-                    if (enemy.ChangeCell(randomDirection)) this.Draw();
+                    if (enemy.ChangeCell(randomDirection)) f = true;
                 }
+                if (f) this.Draw();
                 Thread.Sleep(1000);
             }
         }

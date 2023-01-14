@@ -40,7 +40,7 @@ namespace MyApp
         }
         public Cell GetCell(int x, int y)
         {
-            if (x >= this.Height || y >= this.Width)
+            if (x >= this.Width || y >= this.Height)
                 return null;
             return this.matrix[y][x];
         }
