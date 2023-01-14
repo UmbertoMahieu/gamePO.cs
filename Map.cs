@@ -1,100 +1,48 @@
-
 namespace MyApp
 {
-    class Map
-    {
-        private char[][] matrix;
-
-        public int lenght {get;}
-
-        public int height {get;}
-
-
-        public Map(int lenght, int height)
-        {
-            this.lenght = lenght;
-            this.height = height;
-            matrix = new char[height][];
-            for (int i = 0; i < height; i++)
-            {
-                matrix[i] = new char[lenght];
-
-                for (int j = 0; j < lenght; j++)
-                {
-                    if (i == 0 || i == height -1 || j == 0 || j == lenght -1)
-                    {
-                        matrix[i][j] = '#';
+    class Map {
+        public const int SquareWidth = 3;
+        private Cell[][] matrix;
+        public int Width {get;}
+        public int Height {get;}
+        public Map(int width, int height) {
+            this.Width = width;
+            this.Height = height;
+            this.matrix = new Cell[height][];
+            for (int i = 0; i < height; i++) {
+                this.matrix[i] = new Cell[width];
+                for (int j = 0; j < width; j++) {
+                    if (i == 0 || i == height -1 || j == 0 || j == width -1) {
+                        this.matrix[i][j] = new Cell(this, j, i, CellTypes.Wall);
                     }
-                    else
-                    {
-                        matrix[i][j] = '.';
+                    else {
+                        this.matrix[i][j] = new Cell(this, j, i, CellTypes.Empty);
                     }
                 }
             }
         }
-
-
-        public void Draw(){
-            for (int i = 0; i < this.height; i++)
-            {   
-                for (int j = 0; j < this.lenght; j++)
-                {
-                    System.Console.Write(matrix[i][j]);
+        public void Draw() {
+            for (int i = 0; i < this.Height; i++) {
+                for (int j = 0; j < this.Width; j++) {
+                    for (int k = 0; k < Map.SquareWidth; k++) {
+                        switch (this.matrix[i][j].CellType) {
+                            case CellTypes.Wall:
+                                System.Console.Write('#');
+                                break;
+                            case CellTypes.Empty:
+                                System.Console.Write(' ');
+                                break;
+                        }
+                    }
                 }
                 System.Console.WriteLine();
             }
         }
-
-        public void DrawEntities(List<Entity> entities){
-            for (int i = 0 ; i < entities.Length ; i++)
-            {   
-                System.Console.WriteLine(entities[0].X);
-                System.Console.WriteLine(entities[0].Y);
-            }
-        }
-
-        public void DrawAll(){
-            Draw();
-            DrawEntities(Entity[])
-        }
-
-        public char getCell(int x, int y)
+        public Cell GetCell(int x, int y)
         {
-            return this.matrix[x][y];
+            if (x >= this.Height || y >= this.Width)
+                return null;
+            return this.matrix[y][x];
         }
     }
 }
-
-
-
-
-
-    
-//     for (int i = 0; i < 10; i++)
-//     {
-//         for (int j = 0; j < 10; j++)
-//         {
-//             if (i == playerX && j == playerY)
-//             {
-//                 Console.Write("P");
-//             }
-//             else
-//             {
-//                 bool enemyExist = false;
-//                 foreach (Enemy enemy in enemies)
-//                 {
-//                     if (i == enemy.X && j == enemy.Y)
-//                     {
-//                         Console.Write("E");
-//                         enemyExist = true;
-//                         break;
-//                     }
-//                 }
-//                 if (!enemyExist)
-//                 {
-//                     Console.Write(this.matrix[i][j]);
-//                 }
-//             }
-//         }
-//         Console.WriteLine();
-//     }
